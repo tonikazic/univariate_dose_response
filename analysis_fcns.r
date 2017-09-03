@@ -6546,7 +6546,7 @@ plot_superheats <- function(dir,mat_name,var_name,peak_flag,plot_limits,amatrix)
 
 #       superheat(amatrix,heat.lim=plot_limits,heat.na.col="white",left.label.size = 0.125,left.label.text.size = 3,grid.hline = FALSE,grid.vline = FALSE,bottom.label.text.angle=90,bottom.label.size=0.1,bottom.label.text.size=3,title=paste0("comparison of experimental to simulated surfaces for ",var_name,", linear model ",suffix))
 
-       superheat(amatrix,heat.lim=plot_limits,heat.na.col="white",left.label.size = 0.185,left.label.text.size = 3,left.label.text.alignment = "left",grid.hline = FALSE,grid.vline = FALSE,bottom.label.text.angle=90,bottom.label.size=0.0425,bottom.label.text.size=3,title=paste0("comparison of experimental to simulated surfaces for ",var_name,", linear model ",suffix))
+       superheat(amatrix,heat.lim=plot_limits,heat.na.col="white",left.label.size = 0.185,left.label.text.size = 3,left.label.text.alignment = "left",grid.hline = FALSE,grid.vline = FALSE,bottom.label.text.angle=90,bottom.label.size=0.075,bottom.label.text.size=3,title=paste0("comparison of experimental to simulated surfaces for ",var_name,", linear model ",suffix))
 
        dev.off()
        }
@@ -7001,7 +7001,7 @@ sim_surfaces <- c("b73","x1a","x2b","x1b","x2a","x3a")
 
 # check_experimental_surfs_vs_each_other(exptl_surfaces,"foo.org",10)
 
-# plot_heatmaps("../results/parameter_sweeps/ann_replots")
+plot_heatmaps("../results/parameter_sweeps/ann_replots")
 
 # plot_surfaces_n_images("../results/parameter_sweeps/ann_replots/",c("b73","mo17","x1a","x1b","x2a","x2b","x3a","x3b"))
 
