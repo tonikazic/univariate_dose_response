@@ -6340,8 +6340,14 @@ plot_heatmaps <- function(dir) {
        ranges <- matrix(c(0,300,-6.5,6.5,-0.2,0.3),3,2,byrow=TRUE)
        rownames(ranges) <- params
 
-
        for ( i in params ) {
+
+
+# for just redoing the diffntls
+#
+# Kazic, 201.11.2017
+#
+#              i <- "diffntls"
 
               plot_limits <- ranges[i,]
 
@@ -6359,6 +6365,7 @@ plot_heatmaps <- function(dir) {
  	      mat_np <- reorder_by_classificatn_category(1,mat_np)
 
 
+
 #    reverse the order of the rows, so that b73 is on top;
 
 	      mat <- mat[rev(rownames(mat)),]
@@ -6367,10 +6374,18 @@ plot_heatmaps <- function(dir) {
 
 
 # order columns by points, not rays; clarifies true pattern
+#
+# fixed to reorder diffntls correctly
+#
+# Kazic, 20.11.2017
 
-              re_mat <- reorder_matrix_cols_for_superheat(mat)
-              re_mat_np <- reorder_matrix_cols_for_superheat(mat_np)	      
-
+              if ( i != "diffntls") { 
+                      re_mat <- reorder_matrix_cols_for_superheat(mat)
+                      re_mat_np <- reorder_matrix_cols_for_superheat(mat_np)	      
+                      } else {
+                              re_mat <- reorder_diffntls_matrix_cols_for_superheat(mat)
+                              re_mat_np <- reorder_diffntls_matrix_cols_for_superheat(mat_np)	      
+                              }
 
 
 #             cat(i," ",plot_limits,"\n")
@@ -6513,6 +6528,9 @@ rename_rows <- function(amatrix) {
 #
 # Kazic, 20.7.2017
 
+# ah, this is fine EXCEPT for the differentials; order comes out screwy
+#
+# Kazic, 20.11.2017
 
 reorder_matrix_cols_for_superheat <- function(amatrix) {
         cols <- colnames(amatrix)
@@ -6523,6 +6541,21 @@ reorder_matrix_cols_for_superheat <- function(amatrix) {
         }
 
 
+
+
+
+# modified to fix order for diffntls_matrix
+#
+# Kazic, 20.11.2017
+
+reorder_diffntls_matrix_cols_for_superheat <- function(amatrix) {
+        cols <- colnames(amatrix)
+#	new_col_order <- c(matrix(matrix(cols,6,10,byrow=TRUE),1,60,byrow=FALSE))
+	new_col_order <- c(outer(paste0("delta r",seq(0,5,1)),paste0(":",seq(2,10,1)),FUN="paste0"))
+        reordered <- amatrix[,new_col_order]
+
+        return(reordered)
+        }
 
 
 
@@ -6978,10 +7011,8 @@ dummy <- function() {
 
 
 
-# setBreakpoint("analysis_fcns.r#2254")
-# setBreakpoint("analysis_fcns.r#2280")
-# setBreakpoint("analysis_fcns.r#6391")
-# setBreakpoint("analysis_fcns.r#6479")
+
+# setBreakpoint("analysis_fcns.r#6545")
 
 
 
